@@ -1,6 +1,7 @@
 const { Schema, Types } = require('mongoose');
+const reactionSchema = require('./reaction');
 
-const userSchema = new Schema(
+const thoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
@@ -8,24 +9,11 @@ const userSchema = new Schema(
       minLength: 1,
       maxLength: 280,
     },
-     email: {
-      type: String,
-      required: true,
-      unique: true,
-      match: /.+\@.+\..+/
+     createdAt: {
+      type: Date,
+      default: Date.now, 
     },
-    friends: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'User',
-        },
-        ],
-    thoughts: [
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Thought',
-        },
-    ]
+    reactions: [reactionSchema],
     },
     {
     toJSON: {
@@ -35,8 +23,8 @@ const userSchema = new Schema(
 
 );
 
-userSchema.virtual('friendCount').get(function () {
-    return this.friends.length;
+thoughtSchema.virtual('reactionCount').get(function () {
+    return this.reactions.length;
   });
 
 module.exports = userSchema;
