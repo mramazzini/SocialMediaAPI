@@ -5,26 +5,26 @@ const thoughtSchema = new Schema(
   {
     thoughtText: {
       type: String,
-      required:true,
+      required: true,
       minLength: 1,
       maxLength: 280,
     },
-     createdAt: {
+    createdAt: {
       type: Date,
-      default: Date.now, 
+      default: Date.now,
     },
     reactions: [reactionSchema],
-    },
-    {
+  },
+  {
     toJSON: {
-        virtuals: true,
+      virtuals: true,
     },
-    }
+  }
 
 );
 
 thoughtSchema.virtual('reactionCount').get(function () {
-    return this.reactions.length;
-  });
+  return this.reactions.length;
+});
 
 module.exports = userSchema;
