@@ -2,5 +2,6 @@
  getThoughts,
  createThought,
  updateThought,
- removeThought,*/
- 
+ removeThought,
+ createReaction,
+ removeReaction*/
