@@ -27,4 +27,4 @@ thoughtSchema.virtual('reactionCount').get(function () {
   return this.reactions.length;
 });
 
-module.exports = userSchema;
+module.exports = thoughtSchema;
