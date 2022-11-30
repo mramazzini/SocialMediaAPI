@@ -90,14 +90,14 @@ module.exports = {
     },
     removeReaction(req, res) {
         Thought.findOneAndUpdate(
-            { _id: req.params.applicationId },
-            { $pull: { reactions: { reactionId: req.params.reactionId } } },
+            { _id: req.params.thoughtId },
+            { $pull: { reactions: req.params.reactionId } },
             { runValidators: true, new: true }
         )
-            .then((application) =>
-                !application
-                    ? res.status(404).json({ message: 'No application with this id!' })
-                    : res.json(application)
+            .then((thought) =>
+                !thought
+                    ? res.status(404).json({ message: 'No thought with this id!' })
+                    : res.json(thought)
             )
             .catch((err) => res.status(500).json(err));
     },

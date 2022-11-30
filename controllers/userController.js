@@ -31,8 +31,8 @@ module.exports = {
             })
             .then((user) =>
                 !user
-                    ? res.status(404).json({
-                        message: 'User created, but found no user with that ID',
+                    ? res.json({
+                        message: 'User created',
                     })
                     : res.json('Created the User 🎉')
             )
@@ -48,9 +48,7 @@ module.exports = {
             { runValidators: true, new: true }
         )
             .then((user) =>
-                !user
-                    ? res.status(404).json({ message: 'No User with this id!' })
-                    : res.json(User)
+                    res.json(user)
             )
             .catch((err) => {
                 console.log(err);
@@ -71,7 +69,7 @@ module.exports = {
             .then((user) =>
                 !user
                     ? res.status(404).json({
-                        message: 'User created but no user with this id!',
+                        message: 'User removed',
                     })
                     : res.json({ message: 'User successfully deleted!' })
             )
@@ -80,7 +78,7 @@ module.exports = {
     addFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
-            { $addToSet: { friends: req.body } },
+            { $addToSet: { friends: req.params.friendId } },
             { runValidators: true, new: true }
         )
             .then((user) =>
@@ -92,14 +90,14 @@ module.exports = {
     },
     removeFriend(req, res) {
         User.findOneAndUpdate(
-            { _id: req.params.applicationId },
-            { $pull: { friends: { friendId: req.params.friendId } } },
+            { _id: req.params.userId },
+            { $pull: { friends: req.params.friendId  } },
             { runValidators: true, new: true }
         )
-            .then((application) =>
-                !application
-                    ? res.status(404).json({ message: 'No application with this id!' })
-                    : res.json(application)
+            .then((user) =>
+                !user
+                    ? res.status(404).json({ message: 'No user with this id!' })
+                    : res.json(user)
             )
             .catch((err) => res.status(500).json(err));
     },
