@@ -15,7 +15,7 @@ Fork the repo, install the npm package, enter command `npm run seed` to insert d
 
 ## Usage
 
-[[Demo Video Here]](https://drive.google.com/file/d/1rHRYYI1OsdR9oRbO4VpXzFnFx4XQX5Kv/view?usp=sharing )
+[Click for demo Video](https://drive.google.com/file/d/1rHRYYI1OsdR9oRbO4VpXzFnFx4XQX5Kv/view?usp=sharing )
 
 ## License
 
